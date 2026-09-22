@@ -1,0 +1,57 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+___________ test_funder_cluster_does_not_get_independent_buyer_score ___________
+
+    def test_funder_cluster_does_not_get_independent_buyer_score():
+        with Store(':memory:',mode='demo') as s:
+            rows=[buyer(i,26+i/100,quote_amount=100) for i in range(1,21)]
+            s.ingest([launch(),*rows])
+            unclustered=snapshot(s,30)
+            funds=[Funding(id=f'fund-{i}',ts=T,source='test',wallet=wallet(i),funder=wallet(999),amount_usdc=100)
+                   for i in range(1,21)]
+            s.ingest(funds)
+            clustered=snapshot(s,30)
+            assert clustered['unique_buyers']==20 and clustered['buyer_clusters_estimate']==1
+>           assert clustered['runner_components']['new_buyers']<unclustered['runner_components']['new_buyers']
+E           assert 30 < 30
+
+tests/test_metrics.py:210: AssertionError
+____________ test_extreme_amount_cannot_overflow_analytics[1e10000] ____________
+
+amount = '1e10000'
+
+    @pytest.mark.parametrize('amount',['1e10000','1e-10000'])
+    def test_extreme_amount_cannot_overflow_analytics(amount):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_storage.py:98: Failed
+___________ test_extreme_amount_cannot_overflow_analytics[1e-10000] ____________
+
+amount = '1e-10000'
+
+    @pytest.mark.parametrize('amount',['1e10000','1e-10000'])
+    def test_extreme_amount_cannot_overflow_analytics(amount):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_storage.py:98: Failed
+___________________ test_rpc_response_id_must_match_request ____________________
+
+    def test_rpc_response_id_must_match_request():
+        from arc_monitor.providers.rpc import RpcClient, ProviderError
+        with RpcClient('https://rpc.test',client=httpx.Client(transport=httpx.MockTransport(
+            lambda req:httpx.Response(200,json={'jsonrpc':'2.0','id':999,'result':'0x13b2'})))) as rpc:
+>           with pytest.raises(ProviderError,match='identity'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'arc_monitor.providers.bitquery.ProviderError'>
+
+tests/test_providers.py:244: Failed
+=========================== short test summary info ============================
+FAILED tests/test_metrics.py::test_funder_cluster_does_not_get_independent_buyer_score - assert 30 < 30
+FAILED tests/test_storage.py::test_extreme_amount_cannot_overflow_analytics[1e10000] - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests/test_storage.py::test_extreme_amount_cannot_overflow_analytics[1e-10000] - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests/test_providers.py::test_rpc_response_id_must_match_request - Failed: DID NOT RAISE <class 'arc_monitor.providers.bitquery.ProviderError'>
+4 failed in 0.36s

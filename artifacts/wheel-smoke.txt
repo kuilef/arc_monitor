@@ -1,0 +1,11 @@
+{
+  "mode": "demo",
+  "synthetic": true,
+  "as_of": "2026-09-22T12:00:00Z",
+  "inserted": 1123,
+  "tokens": 7,
+  "trades": 590
+}
+Installed package: /mnt/data/arc_monitor_wheel_env/lib/python3.13/site-packages/arc_monitor/__init__.py
+Wheel smoke: CLI, packaged HTML/JS, API, 7 demo tokens: PASS
+Dependency packages are reused from the preinstalled runtime, not freshly downloaded.

@@ -1,0 +1,4 @@
+{
+  "exported": 1123,
+  "path": "examples/synthetic-events.jsonl"
+}

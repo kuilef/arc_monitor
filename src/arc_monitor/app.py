@@ -51,12 +51,14 @@ def create_app(store: Store, *, max_tokens: int=500) -> FastAPI:
 
     @app.get('/api/status')
     def status():
+        from .operations import collection_status
         cursors={k:store.checkpoint(k) for k in ['launches','trades','flows']}
         return {'mode':store.mode,'synthetic':store.mode=='demo','chain_id':5042,
                 'as_of':iso(cutoff()),'score_version':SCORE_VERSION,'dashboard_limit':max_tokens,
                 'checkpoints':{k:iso(v) if v else None for k,v in cursors.items()},
                 'coverage_note':'A checkpoint is not proof of gap-free or all-chain coverage.',
-                'rows':{k:store.count(k) for k in ['launch','trade','liquidity','holders','funding','risk']}}
+                'rows':{k:store.count(k) for k in ['launch','trade','liquidity','holders','funding','risk']},
+                'collection':collection_status(store,cutoff())}
 
     @app.get('/api/tokens')
     def tokens(q: str=Query('',max_length=150), stage: str=Query('',max_length=30),
@@ -120,6 +122,8 @@ def create_app(store: Store, *, max_tokens: int=500) -> FastAPI:
 def app_from_env() -> FastAPI:
     """ASGI factory for container/process managers; credentials are not exposed by status."""
     import os
+    from .config import load_env
+    load_env(os.getenv('ARC_ENV_FILE','.env'))
     from contextlib import asynccontextmanager
 
     store=Store(os.getenv('ARC_DB','data/arc.db'),mode=os.getenv('ARC_MODE','live'))

@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_asgi_factory_uses_explicit_dataset ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-6/test_asgi_factory_uses_explici0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f54ef4676f0>
+
+    def test_asgi_factory_uses_explicit_dataset(tmp_path,monkeypatch):
+>       from arc_monitor.app import app_from_env
+E       ImportError: cannot import name 'app_from_env' from 'arc_monitor.app' (/mnt/data/arc_monitor/src/arc_monitor/app.py)
+
+tests/test_app.py:105: ImportError
+=========================== short test summary info ============================
+FAILED tests/test_app.py::test_asgi_factory_uses_explicit_dataset - ImportError: cannot import name 'app_from_env' from 'arc_monitor.app' (/mnt/data/arc_monitor/src/arc_monitor/app.py)
+1 failed in 0.40s

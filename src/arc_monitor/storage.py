@@ -6,7 +6,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from sqlalchemy import (BigInteger, Column, Index, Integer, MetaData, String, Table,
+from sqlalchemy import (BigInteger, Column, Index, MetaData, String, Table,
                         Text, create_engine, event as sa_event, select)
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
@@ -93,6 +93,21 @@ class Store:
 
     def _insert(self, table):
         return sqlite_insert(table) if self.engine.dialect.name == 'sqlite' else pg_insert(table)
+
+    def get_state(self, key: str):
+        with self.engine.connect() as conn:
+            value=conn.execute(select(self.settings.c.value).where(
+                self.settings.c.key=='ops:'+key)).scalar_one_or_none()
+        return json.loads(value) if value is not None else None
+
+    def set_state(self, key: str, value):
+        self.set_states({key:value})
+
+    def set_states(self, values: dict):
+        with self.engine.begin() as conn:
+            for key,value in values.items():
+                stmt=self._insert(self.settings).values(key='ops:'+key,value=canonical(value))
+                conn.execute(stmt.on_conflict_do_update(index_elements=['key'],set_={'value':canonical(value)}))
 
     def _ingest(self, conn, events: list[Event]) -> int:
         count = 0

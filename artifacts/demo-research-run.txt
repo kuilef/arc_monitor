@@ -1,0 +1,134 @@
+{
+  "mode": "demo",
+  "as_of": "2026-09-22T12:00:00Z",
+  "rows": 72,
+  "cohorts": [
+    {
+      "feature_minutes": 5,
+      "horizon_hours": 1,
+      "rows": 5,
+      "eligible": 4,
+      "censored_or_incomplete": 1,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 5,
+      "horizon_hours": 6,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 5,
+      "horizon_hours": 24,
+      "rows": 5,
+      "eligible": 2,
+      "censored_or_incomplete": 3,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 5,
+      "horizon_hours": 72,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 15,
+      "horizon_hours": 1,
+      "rows": 5,
+      "eligible": 4,
+      "censored_or_incomplete": 1,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 15,
+      "horizon_hours": 6,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 15,
+      "horizon_hours": 24,
+      "rows": 5,
+      "eligible": 2,
+      "censored_or_incomplete": 3,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 15,
+      "horizon_hours": 72,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 30,
+      "horizon_hours": 1,
+      "rows": 5,
+      "eligible": 4,
+      "censored_or_incomplete": 1,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 30,
+      "horizon_hours": 6,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 30,
+      "horizon_hours": 24,
+      "rows": 5,
+      "eligible": 2,
+      "censored_or_incomplete": 3,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 30,
+      "horizon_hours": 72,
+      "rows": 5,
+      "eligible": 1,
+      "censored_or_incomplete": 4,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 60,
+      "horizon_hours": 6,
+      "rows": 4,
+      "eligible": 1,
+      "censored_or_incomplete": 3,
+      "survival_rate": 0.0
+    },
+    {
+      "feature_minutes": 60,
+      "horizon_hours": 24,
+      "rows": 4,
+      "eligible": 2,
+      "censored_or_incomplete": 2,
+      "survival_rate": 0.5
+    },
+    {
+      "feature_minutes": 60,
+      "horizon_hours": 72,
+      "rows": 4,
+      "eligible": 1,
+      "censored_or_incomplete": 3,
+      "survival_rate": 0.0
+    }
+  ],
+  "interpretation": "Descriptive event-time research, not fitted prediction or executable P&L.",
+  "limitations": [
+    "Synthetic results do not establish market alpha.",
+    "No slippage, tax, MEV, transaction costs or delivery-latency model.",
+    "One token appears at multiple cutoffs; rows are not independent samples.",
+    "Use purged_time_split to separate all training labels from hold-out feature times."
+  ]
+}

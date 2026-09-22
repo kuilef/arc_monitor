@@ -22,7 +22,9 @@ PROTOCOLS = ['uniswap_v2', 'uniswap_v3', 'uniswap_v4']
 
 
 class ProviderError(RuntimeError):
-    pass
+    def __init__(self,message,*,retryable=False):
+        super().__init__(message)
+        self.retryable=retryable
 
 
 def decimal_string(value) -> str:
@@ -195,7 +197,7 @@ def query_for(kind: str, start: datetime, end: datetime, limit: int) -> str:
 
 class BitqueryClient:
     def __init__(self, token: str, *, client: httpx.Client | None = None,
-                 sleep=time.sleep, max_requests: int = 500):
+                 sleep=time.sleep, max_requests: int = 500, budget=None):
         if not token or not token.strip():
             raise ValueError('Set BITQUERY_TOKEN locally; no API token was provided')
         self._token = token.strip()
@@ -203,25 +205,55 @@ class BitqueryClient:
         self.sleep = sleep
         self.requests = 0
         self.max_requests = max_requests
+        self.budget=budget
+
+    def usage(self) -> dict:
+        if self.budget:
+            self.budget.consume(charge=False)
+        try:
+            response=self.client.get('https://account.bitquery.io/api/usage',
+                                     headers={'Authorization':'Bearer '+self._token})
+            if response.status_code!=200:
+                raise ProviderError(f'Bitquery Usage HTTP {response.status_code}; collection stopped')
+            body=response.json()
+            period=body['billing_period']
+            safe={'status':body['status'],'billing_period':{k:period.get(k) for k in
+                ['started_at','ended_at','plan_name','limits','usage']}}
+            if self.budget:
+                from ..budget import BudgetExceeded
+                try:
+                    self.budget.observe_usage(safe)
+                except BudgetExceeded as error:
+                    error.usage=safe
+                    raise
+            return safe
+        except (httpx.TransportError,ValueError,KeyError,TypeError):
+            raise ProviderError('Bitquery Usage unavailable or malformed; collection stopped') from None
 
     def fetch(self, kind: str, start: datetime, end: datetime, limit: int) -> list[dict]:
         query = query_for(kind,start,end,limit)
+        return self.execute(query,'Trading' if kind=='trades' else 'EVM',
+                            'Trades' if kind=='trades' else 'Events')
+
+    def execute(self, query: str, root: str, cube: str) -> list[dict]:
         body = None
         for attempt in range(3):
             if self.requests >= self.max_requests:
                 raise ProviderError('API request budget exhausted; committed windows can be resumed')
+            if self.budget:
+                self.budget.consume()
             self.requests += 1
             try:
                 response = self.client.post(ENDPOINT,headers={'Authorization':'Bearer '+self._token},
                                             json={'query':query})
             except httpx.TransportError:
                 if attempt==2:
-                    raise ProviderError('Bitquery transport failed after 3 attempts') from None
+                    raise ProviderError('Bitquery transport failed after 3 attempts',retryable=True) from None
                 self.sleep(2**attempt)
                 continue
             if response.status_code==429 or response.status_code>=500:
                 if attempt==2:
-                    raise ProviderError(f'Bitquery temporary HTTP {response.status_code}; retry budget exhausted')
+                    raise ProviderError(f'Bitquery temporary HTTP {response.status_code}; retry budget exhausted',retryable=True)
                 try:
                     delay = float(response.headers.get('Retry-After',2**attempt))
                 except ValueError:
@@ -231,7 +263,7 @@ class BitqueryClient:
             if response.status_code!=200:
                 raise ProviderError(f'Bitquery HTTP {response.status_code}; verify token and plan permissions')
             try:
-                body=response.json()
+                body=json.loads(response.text,parse_float=str)
             except ValueError:
                 raise ProviderError('Bitquery returned invalid JSON') from None
             if not isinstance(body,dict) or body.get('errors') or not isinstance(body.get('data'),dict):
@@ -239,7 +271,7 @@ class BitqueryClient:
                 raise ProviderError('Bitquery GraphQL error or missing data; check query in provider IDE')
             break
         try:
-            rows = body['data']['Trading' if kind=='trades' else 'EVM']['Trades' if kind=='trades' else 'Events']
+            rows = body['data'][root][cube]
         except (KeyError,TypeError):
             raise ProviderError('Bitquery response shape changed; refusing to mark empty coverage') from None
         if not isinstance(rows,list):

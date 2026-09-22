@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________________ test_metric_engine_exists ___________________________
+
+    def test_metric_engine_exists():
+        import importlib.util
+>       assert importlib.util.find_spec('arc_monitor.metrics') is not None, 'metric engine not implemented'
+E       AssertionError: metric engine not implemented
+E       assert None is not None
+E        +  where None = <function find_spec at 0x7fae9ebefb00>('arc_monitor.metrics')
+E        +    where <function find_spec at 0x7fae9ebefb00> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = <module 'importlib' from '/usr/lib/python3.13/importlib/__init__.py'>.util
+
+tests/test_metrics.py:27: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_metrics.py::test_metric_engine_exists - AssertionError: metric engine not implemented
+assert None is not None
+ +  where None = <function find_spec at 0x7fae9ebefb00>('arc_monitor.metrics')
+ +    where <function find_spec at 0x7fae9ebefb00> = <module 'importlib.util' (frozen)>.find_spec
+ +      where <module 'importlib.util' (frozen)> = <module 'importlib' from '/usr/lib/python3.13/importlib/__init__.py'>.util
+1 failed in 0.22s

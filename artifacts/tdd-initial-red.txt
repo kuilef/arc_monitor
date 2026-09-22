@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________________________ test_schema_exists ______________________________
+
+    def test_schema_exists():
+        import importlib.util
+>       assert importlib.util.find_spec('arc_monitor.models') is not None, 'event schema is not implemented'
+E       AssertionError: event schema is not implemented
+E       assert None is not None
+E        +  where None = <function find_spec at 0x7f99da027b00>('arc_monitor.models')
+E        +    where <function find_spec at 0x7f99da027b00> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = <module 'importlib' from '/usr/lib/python3.13/importlib/__init__.py'>.util
+
+tests/test_storage.py:28: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_storage.py::test_schema_exists - AssertionError: event schema is not implemented
+assert None is not None
+ +  where None = <function find_spec at 0x7f99da027b00>('arc_monitor.models')
+ +    where <function find_spec at 0x7f99da027b00> = <module 'importlib.util' (frozen)>.find_spec
+ +      where <module 'importlib.util' (frozen)> = <module 'importlib' from '/usr/lib/python3.13/importlib/__init__.py'>.util
+1 failed in 0.08s

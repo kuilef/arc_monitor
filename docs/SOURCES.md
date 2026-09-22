@@ -1,7 +1,8 @@
 # Sources checked for implementation — 22 September 2026
 
-These are external API references, not proof that an authenticated query or a full-market
-backfill succeeded in this delivery. No Bitquery token was available.
+These are external API references, not proof of a full-market backfill.
+No Bitquery token was available during the initial delivery. A later authenticated
+sample and independent RPC comparison are recorded in [LIVE_INTEGRATION.md](LIVE_INTEGRATION.md).
 
 - Arc overview and network identifiers: https://docs.bitquery.io/docs/blockchain/arc-mainnet/
 - Trades, recent rolling window, pair orientation and v4 Pool.Id:

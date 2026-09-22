@@ -13,8 +13,9 @@ from .bitquery import ProviderError
 
 
 class GeckoClient:
-    def __init__(self, *, client=None):
+    def __init__(self, *, client=None,budget=None):
         self.client=client or httpx.Client(timeout=30)
+        self.budget=budget
 
     def pool_liquidity(self, token: str, pool: str, *, observed_at=None) -> Liquidity:
         token=address(token)
@@ -22,6 +23,8 @@ class GeckoClient:
             raise ValueError('pool must be an explicit address or bytes32 pool ID')
         pool=pool.lower()
         try:
+            if self.budget:
+                self.budget.consume(charge=False)
             response=self.client.get('https://api.geckoterminal.com/api/v2/networks/arc/pools/'+pool)
             if response.status_code!=200:
                 raise ProviderError(f'GeckoTerminal HTTP {response.status_code}; no snapshot recorded')

@@ -134,6 +134,19 @@ async function refresh() {
     $('error').hidden=true;
     $('mode').textContent=status.mode.toUpperCase();
     $('banner').textContent=status.synthetic?'DEMO · Синтетические сценарии. Это не реальные токены, не рыночные данные и не доказательство прибыльности.':'LIVE DATASET · Наблюдаемые данные. Рейтинги не проверены на прогнозную точность; неполное покрытие ограничивает выводы.';
+    const collection=status.collection;
+    if (collection) {
+      const parts=['launches','trades'].map(k=>{
+        const s=collection.streams[k];
+        return k+': '+(s.fresh?'свежие':'устарели / ещё не загружены')+
+          ', пробелы за 24 ч: '+number(s.gap_seconds/60,0)+' мин';
+      });
+      const run=collection.collector;
+      parts.push('Сбор: '+(run ? (run.unresponsive?'нет heartbeat':run.status) : 'не запускался'));
+      const q=collection.quota?.billing_period;
+      if(q?.usage && q?.limits) parts.push('Points: '+number(q.usage.points_usage,0)+' / '+number(q.limits.points_limit,0)+' (счётчик может запаздывать)');
+      $('collection-health').textContent=status.synthetic?'DEMO · Статус относится к синтетическому набору.':parts.join(' · ');
+    }
     $('asof').textContent=status.as_of.replace('T',' ').replace('Z',' UTC');
     $('tokens-count').textContent=number(eco.observed_tokens,0);
     $('traders').textContent=number(eco.active_traders_24h,0);

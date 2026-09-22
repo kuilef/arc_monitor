@@ -1,0 +1,13 @@
+{
+  "external_requests": [],
+  "console_errors": [],
+  "checks": [
+    "real local HTTP server: HTML, static JS and security headers",
+    "desktop: 7 rows, DEMO warning, default detail and local charts",
+    "search and token detail selection",
+    "stage filter",
+    "390px viewport without document overflow; table scrolls inside container"
+  ],
+  "browser_mode": "offline page with real HTTP API response bridge; direct navigation blocked by managed Chromium",
+  "passed": true
+}

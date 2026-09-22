@@ -1,6 +1,5 @@
 import importlib.util
 import json
-from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -35,6 +34,7 @@ def test_api_filter_detail_and_missing_risk():
         with TestClient(create_app(s)) as c:
             status=c.get('/api/status').json()
             assert status['mode']=='demo' and status['synthetic'] is True
+            assert 'gap_seconds' in status['collection']['streams']['trades']
             data=c.get('/api/tokens').json()
             assert data['total']==7
             token=data['items'][0]['token']
@@ -63,7 +63,7 @@ def test_cli_demo_research_and_missing_key(tmp_path,capsys,monkeypatch):
     assert report['mode']=='demo' and report['rows']>0
     assert (tmp_path/'report'/'features_and_outcomes.csv').is_file()
     monkeypatch.delenv('BITQUERY_TOKEN',raising=False)
-    assert main(['--db',str(tmp_path/'live.db'),'backfill','--start','2026-09-16T00:00:00Z',
+    assert main(['--no-env-file','--db',str(tmp_path/'live.db'),'backfill','--start','2026-09-16T00:00:00Z',
                  '--end','2026-09-16T00:01:00Z'])==2
     assert 'BITQUERY_TOKEN' in capsys.readouterr().err
 

@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ test_runnable_app_modules_exist ________________________
+
+    def test_runnable_app_modules_exist():
+        for name in ['demo','app','cli']:
+>           assert importlib.util.find_spec('arc_monitor.'+name) is not None, name+' not implemented'
+E           AssertionError: demo not implemented
+E           assert None is not None
+E            +  where None = <function find_spec at 0x7ff111953b00>(('arc_monitor.' + 'demo'))
+E            +    where <function find_spec at 0x7ff111953b00> = <module 'importlib.util' (frozen)>.find_spec
+E            +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_app.py:13: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_app.py::test_runnable_app_modules_exist - AssertionError: demo not implemented
+assert None is not None
+ +  where None = <function find_spec at 0x7ff111953b00>(('arc_monitor.' + 'demo'))
+ +    where <function find_spec at 0x7ff111953b00> = <module 'importlib.util' (frozen)>.find_spec
+ +      where <module 'importlib.util' (frozen)> = importlib.util
+1 failed in 0.37s

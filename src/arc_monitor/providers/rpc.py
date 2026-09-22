@@ -11,21 +11,24 @@ from .bitquery import ProviderError, normalize_launch
 from .registry import REGISTRY
 
 ALLOWED = {'eth_chainId','eth_blockNumber','eth_getBlockByNumber','eth_getCode','eth_getLogs',
-           'eth_call','eth_getBalance','eth_getTransactionReceipt'}
+           'eth_call','eth_getBalance','eth_getTransactionReceipt','eth_getStorageAt','web3_sha3'}
 
 
 class RpcClient:
-    def __init__(self,url: str,*,client: httpx.Client | None = None):
+    def __init__(self,url: str,*,client: httpx.Client | None = None,budget=None):
         self.url=url
         self.client=client or httpx.Client(timeout=30)
         self._id=0
         self._verified=False
+        self.budget=budget
 
     def call(self,method: str,params: list | None = None):
         if method not in ALLOWED:
             raise ValueError('RPC client is read-only; method is not permitted')
         if method!='eth_chainId' and not self._verified:
             self.verify()
+        if self.budget:
+            self.budget.consume()
         self._id+=1
         try:
             response=self.client.post(self.url,json={'jsonrpc':'2.0','id':self._id,'method':method,'params':params or []})

@@ -1,0 +1,27 @@
+........................................................................ [ 90%]
+........                                                                 [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.5-final-0 ________________
+
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+src/arc_monitor/__init__.py                 0      0   100%
+src/arc_monitor/__main__.py                 2      2     0%   1-3
+src/arc_monitor/alerting.py                18      1    94%   12
+src/arc_monitor/app.py                     96      5    95%   24, 88-89, 105, 114
+src/arc_monitor/cli.py                    183     70    62%   85-89, 91-92, 95, 99, 105, 115, 117, 119-126, 129-132, 134-150, 154-181, 183-187, 197-198, 206
+src/arc_monitor/collection.py              64      5    92%   20, 24, 56-57, 71
+src/arc_monitor/demo.py                    73      1    99%   53
+src/arc_monitor/metrics.py                186      3    98%   104-105, 201
+src/arc_monitor/models.py                 106      1    99%   114
+src/arc_monitor/providers/bitquery.py     185     29    84%   31, 41, 44, 47, 54, 57, 63, 75, 91, 98, 109, 113, 116, 124, 133, 159, 161, 212, 217-221, 224, 227-228, 235-236, 246
+src/arc_monitor/providers/gecko.py         32      4    88%   22, 27, 34, 39
+src/arc_monitor/providers/registry.py       1      0   100%
+src/arc_monitor/providers/rpc.py           95      9    91%   34-35, 37, 53, 81, 89, 94, 97, 100
+src/arc_monitor/research.py               115      7    94%   17, 21-22, 76-77, 83-84
+src/arc_monitor/storage.py                154      8    95%   33, 38, 52-53, 113, 139, 141, 156
+src/arc_monitor/wash.py                    34      0   100%
+---------------------------------------------------------------------
+TOTAL                                    1344    145    89%
+Coverage JSON written to file artifacts/coverage.json
+80 passed in 4.49s

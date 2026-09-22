@@ -1,0 +1,10 @@
+WARNING: The directory '/home/oai/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Processing /mnt/data/arc_monitor
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: arc-monitor
+  Building wheel for arc-monitor (pyproject.toml): started
+  Building wheel for arc-monitor (pyproject.toml): finished with status 'done'
+  Created wheel for arc-monitor: filename=arc_monitor-0.1.0-py3-none-any.whl size=44909 sha256=beda53ea068093c978fabf2f1c9b53fa2a6e4da8106c71a7ded5fc9f2fed2d76
+  Stored in directory: /tmp/pip-ephem-wheel-cache-er7fo4_z/wheels/97/51/1d/f8e196de7618fc0f6b77183ed8fad98ee01414b52cdd443ab1
+Successfully built arc-monitor
