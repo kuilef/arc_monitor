@@ -1,0 +1,5 @@
+query { Trading { Trades(limit: {count: 1000}, orderBy: {ascending: Block_Time}, where: {Block:{Time:{since:"2026-09-16T00:00:00Z",till:"2026-09-16T00:00:59Z"}},Pair:{Market:{Network:{is:"Arc"},Protocol:{in:["uniswap_v2","uniswap_v3","uniswap_v4"]}}},any:[{Pair:{Token:{Id:{in:["bid:arc","bid:arc:0x3600000000000000000000000000000000000000"]}}}},{Pair:{QuoteToken:{Id:{in:["bid:arc","bid:arc:0x3600000000000000000000000000000000000000"]}}}}]}) {
+            Block {Time} TransactionHeader {Hash} Trader {Address} Side
+            Amounts {Base Quote} Pair {Market {Network Protocol} Pool {Id Address}
+            Token {Id Address Symbol} QuoteToken {Id Address Symbol}}
+        } } }

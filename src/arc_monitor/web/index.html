@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Arc Monitor — Research Workbench</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Arc Monitor"><span class="mark">A</span> ARC <span class="brand-light">MONITOR</span></a>
+    <div class="topmeta"><span class="pill">READ-ONLY</span><span id="mode" class="pill">…</span><span>CHAIN 5042</span></div>
+  </header>
+  <main>
+    <div id="banner" class="banner">Загрузка состояния набора данных…</div>
+    <section class="intro">
+      <div><div class="eyebrow">TOKEN LAUNCH RESEARCH / v0.1</div><h1>Спрос, а не оборот.</h1>
+        <p>Покупатели, ликвидность и качество данных — рядом, а не в одном «магическом» рейтинге.</p></div>
+      <div class="timestamp"><span class="muted">Срез данных, UTC</span><strong id="asof">—</strong><button id="refresh">Обновить ↻</button></div>
+    </section>
+    <section class="cards" aria-label="Обзор наблюдаемого рынка">
+      <article><span>Токенов в базе</span><strong id="tokens-count">—</strong><small>Обнаруженные адреса контрактов</small></article>
+      <article><span>Участников / 24 ч</span><strong id="traders">—</strong><small>Кошельки, не уникальные люди</small></article>
+      <article><span>Оборот после фильтра / 24 ч</span><strong id="adjusted">—</strong><small>USDC · эвристическая оценка</small></article>
+      <article><span>Исходный оборот / 24 ч</span><strong id="raw">—</strong><small>USDC · только наблюдаемые пары</small></article>
+      <article><span>Чистый CCTP / 24 ч</span><strong id="cctp">—</strong><small id="cctp-note">Только при подтверждённом покрытии</small></article>
+    </section>
+    <section class="workspace">
+      <div class="universe">
+        <div class="section-head"><h2>Наблюдаемые токены</h2><span id="count-label" class="muted">—</span></div>
+        <div class="filters"><label class="search"><span class="sr-only">Поиск</span><input id="search" placeholder="Адрес контракта или символ…" autocomplete="off"></label>
+          <label><span class="sr-only">Стадия</span><select id="stage"><option value="">Все стадии</option><option>NEW</option><option>TRIAGE</option><option>WATCH</option><option>CANDIDATE</option><option>RUNNER</option><option>LOW_ACTIVITY</option></select></label>
+          <label><span class="sr-only">Сортировка</span><select id="sort"><option value="runner_score">Runner ↓</option><option value="age_minutes">Возраст ↑</option><option value="adjusted_volume_usdc">Оборот ↓</option><option value="unique_buyers">Покупатели ↓</option></select></label>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Токен / площадка</th><th>Стадия / возраст</th><th>Оборот¹</th><th>Новые / 5 м</th><th>Кластеры²</th><th>Ликвидность</th><th>Runner</th><th>Risk³</th><th>Wash</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <p id="empty" hidden>По этому фильтру ничего не найдено.</p>
+        <div class="table-notes">¹ За 30 минут, после эвристического фильтра; это не доказанный органический объём.<br>² Оценка по первому наблюдаемому источнику средств / кошельки-покупатели.<br>³ 100 = меньше известных рисков. «—» = недостаточно данных, а не отсутствие риска.</div>
+        <div class="chart-panel"><div class="section-head"><h2>Что остаётся после фильтра</h2><span class="muted">30 мин · USDC</span></div>
+          <div class="legend"><span class="dot raw-dot"></span>Исходный оборот <span class="dot adjusted-dot"></span>После фильтра</div>
+          <svg id="volume-chart" viewBox="0 0 820 190" role="img" aria-label="Сравнение исходного и отфильтрованного оборота"></svg>
+        </div>
+      </div>
+      <aside id="detail" class="detail" aria-live="polite"><div class="eyebrow">TOKEN INSPECTOR</div><h2 id="detail-title">Выберите токен</h2><p id="detail-address" class="address">Нажмите на строку таблицы</p>
+        <div id="detail-body" hidden>
+          <div id="detail-scores" class="score-row"></div>
+          <div class="section-head"><h3>Цены наблюдаемых сделок</h3><small>USDC / token</small></div>
+          <svg id="price-chart" viewBox="0 0 460 165" role="img" aria-label="Выборка цен сделок"></svg>
+          <p class="chart-disclaimer">Не свечи OHLC и не цена возможного исполнения.</p>
+          <dl id="facts"></dl><h3>Качество данных</h3><div id="missing"></div><div id="quality" class="quality"></div>
+          <details><summary>Компоненты Runner Score</summary><pre id="components"></pre></details>
+        </div>
+      </aside>
+    </section>
+    <footer><span>ARC MONITOR · локальный исследовательский инструмент</span><span id="coverage">Покрытие не проверено</span><p>Рейтинги — некалиброванные эвристики, не прогноз прибыли. История неполная → результат неизвестен. Покупка, продажа и отправка уведомлений не выполняются.</p></footer>
+    <div id="error" role="alert" hidden></div>
+  </main>
+</body>
+</html>

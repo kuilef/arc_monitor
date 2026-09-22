@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+.pytest_cache
+.env
+*.db*
+data
+reports
+artifacts
+build
+dist
+*.egg-info
