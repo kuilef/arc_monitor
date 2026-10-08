@@ -1,0 +1,350 @@
+{
+  "decision": {
+    "counterexample_evidence_kind": "synthetic_valid_protocol_vector",
+    "external_service_bug_proven": false,
+    "next_step": "keep_small_corpus_in_existing_repo; require_public_live_CCTP_evidence_before_expansion",
+    "nontrivial_reproducible_counterexample": "valid_source_messages_collide_under_source_domain_zero_nonce",
+    "standalone_project": "not_justified_yet"
+  },
+  "equal_transfer_legs": {
+    "candidate_counts": {
+      "quote": 1,
+      "token": 2
+    },
+    "evidence_kind": "synthetic_valid_protocol_vector",
+    "identity": {
+      "block_hash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "block_number": 42,
+      "log_indexes": [
+        3,
+        4,
+        5
+      ],
+      "transaction_hash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "reason": "ambiguous_transfer_legs",
+    "reconciliation_status": "unknown",
+    "status": "ambiguous"
+  },
+  "fixture_sha256_canonical_json": {
+    "public-mainnet.json": "941a4e6468aa36132ab7c074cb7753cf3c4602e59b6aa4026334fab3da492196",
+    "synthetic-protocol.json": "728864d1ba7f1d63712ef884a26bab0e7c681c62f576491b77f75e159a36b74e"
+  },
+  "historical_receipts": [
+    {
+      "reason": "anonymous_rpc_returned_null",
+      "status": "unknown",
+      "transaction_hash": "0xe7fe6ac3b80b454b8d3264e63d858ec4902b9869c29a3ae081e8288fd6ffbebd"
+    },
+    {
+      "reason": "anonymous_rpc_returned_null",
+      "status": "unknown",
+      "transaction_hash": "0x2647e938fd5c3b8295f4452179b0f135fb895b9c937dd56206411f0ced69d7ff"
+    },
+    {
+      "reason": "anonymous_rpc_returned_null",
+      "status": "unknown",
+      "transaction_hash": "0xf33d6f2cfe43c6b4de6eb0f34661cb0602a861b58eabd5bbc069b27fd9f2e3d5"
+    }
+  ],
+  "incoming_amounts": {
+    "amounts_base_units": {
+      "fee": "10000",
+      "gross": "1000000",
+      "max_fee": "10000",
+      "recipient_net": "990000"
+    },
+    "evidence_kind": "synthetic_valid_protocol_vector",
+    "identity": {
+      "amounts_base_units": {
+        "fee": "10000",
+        "gross": "1000000",
+        "max_fee": "10000",
+        "recipient_net": "990000"
+      },
+      "amounts_usdc": {
+        "fee": "0.010000",
+        "gross": "1.000000",
+        "max_fee": "0.010000",
+        "recipient_net": "0.990000"
+      },
+      "block_hash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "block_number": 100,
+      "direction": "in",
+      "fee_recipient": "0x6666666666666666666666666666666666666666",
+      "flow_id": "cctp-flow:52dd436230b2712c119f79314cd54d41cc26c4736b7e6442",
+      "identity_scope": "final_source_domain_nonce",
+      "log_indexes": {
+        "burn": null,
+        "fee_mint": 3,
+        "message": 0,
+        "protocol": 1,
+        "recipient_mint": 2
+      },
+      "message_key": "cctp-v2:0:0000000000000000000000000000000000000000000000000000000000000007",
+      "mint_recipient": "0x1111111111111111111111111111111111111111",
+      "timestamp": "2026-09-20T12:00:00Z",
+      "transaction": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "log_indexes": {
+      "burn": null,
+      "fee_mint": 3,
+      "message": 0,
+      "protocol": 1,
+      "recipient_mint": 2
+    },
+    "naive_net_as_gross_error_base_units": "10000",
+    "status": "validated"
+  },
+  "limitations": [
+    "single_anonymous_RPC_not_independent_consensus_proof",
+    "no_raw_Bitquery_responses",
+    "synthetic_CCTP_and_trade_vectors_not_live_service_failures",
+    "mainnet_only_5042",
+    "uses_existing_private_decoder_functions_pinned_to_base_commit",
+    "no_attestation_or_destination_chain_delivery_proof",
+    "no_new_license_grant"
+  ],
+  "live_cctp_reason": "no_events_in_single_bounded_256_block_discovery_request",
+  "live_cctp_status": "unknown",
+  "live_receipts": [
+    {
+      "canonical_movement_count": 1,
+      "evidence_kind": "live_rpc_capture",
+      "gas_base_units_18": "2143920107517588",
+      "gas_precision_lost_base_units_18": "920107517588",
+      "gas_scope": "receipt_fee_paid_by_transaction_sender_separate_from_transfer_volume",
+      "gas_truncated_to_6_decimals_base_units_18": "2143000000000000",
+      "identity": {
+        "block_hash": "0xb51a0ecf1cd3f0f2bb9afcc576cd5599fa6c2013dba14259d17d84a3f74bd853",
+        "block_number": 24947854,
+        "chain_id": 5042,
+        "log_indexes": [
+          0,
+          1,
+          2
+        ],
+        "transaction_hash": "0xbf3b9a3aa2e9a0c740725b6d6d42471a35565976d97394f234185b8f906d4477"
+      },
+      "mirror_candidates": [
+        {
+          "erc20_log_indexes": [
+            1
+          ],
+          "native_log_index": 0,
+          "status": "unique"
+        }
+      ],
+      "naive_combined_volume_base_units_18": "33719400000000000000",
+      "native_volume_base_units_18": "16859700000000000000",
+      "status": "validated",
+      "transfers": [
+        {
+          "decimals": 18,
+          "log_index": 0,
+          "raw_amount": "16859700000000000000",
+          "receiver": "0xa6fc9e69219076396507efe929ebc14a6f3ec0d9",
+          "sender": "0x47d4164f2f65afc00c7ba932cbec9858b5fdaf0a",
+          "token": "0xfffffffffffffffffffffffffffffffffffffffe"
+        },
+        {
+          "decimals": 6,
+          "log_index": 1,
+          "raw_amount": "16859700",
+          "receiver": "0xa6fc9e69219076396507efe929ebc14a6f3ec0d9",
+          "sender": "0x47d4164f2f65afc00c7ba932cbec9858b5fdaf0a",
+          "token": "0x3600000000000000000000000000000000000000"
+        }
+      ],
+      "unpaired_erc20_log_indexes": []
+    },
+    {
+      "canonical_movement_count": 0,
+      "evidence_kind": "live_rpc_capture",
+      "gas_base_units_18": "458000022922900",
+      "gas_precision_lost_base_units_18": "22922900",
+      "gas_scope": "receipt_fee_paid_by_transaction_sender_separate_from_transfer_volume",
+      "gas_truncated_to_6_decimals_base_units_18": "458000000000000",
+      "identity": {
+        "block_hash": "0xb51a0ecf1cd3f0f2bb9afcc576cd5599fa6c2013dba14259d17d84a3f74bd853",
+        "block_number": 24947854,
+        "chain_id": 5042,
+        "log_indexes": [],
+        "transaction_hash": "0x6cf680262a4d9cd13a969c64c80802a7435baa5560daf17d34c2d80014fd61cb"
+      },
+      "mirror_candidates": [],
+      "naive_combined_volume_base_units_18": "0",
+      "native_volume_base_units_18": "0",
+      "status": "validated",
+      "transfers": [],
+      "unpaired_erc20_log_indexes": []
+    }
+  ],
+  "pending_nonce_collision": {
+    "destination_delivery": "unknown",
+    "evidence_kind": "synthetic_valid_protocol_vector",
+    "evidence_unique_keys": 2,
+    "executed_fee": "unknown",
+    "flow_ids": [
+      "cctp-flow:af62b1a83ff480572a3b77b70dceba51b379f88171620ef0",
+      "cctp-flow:f83b56008b55a8b7c456e31ba53a9fc52552283c6af416ee"
+    ],
+    "naive_keyed_gross_total_base_units": "2000000",
+    "naive_unique_keys": 1,
+    "source_evidence": [
+      {
+        "flow": {
+          "amount_usdc": "2.000000",
+          "direction": "out",
+          "id": "cctp-flow:af62b1a83ff480572a3b77b70dceba51b379f88171620ef0",
+          "kind": "flow",
+          "message_key": "cctp-v2-pending:26:0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:0",
+          "source": "cctp_rpc",
+          "token": "0x3600000000000000000000000000000000000000",
+          "ts": "2026-09-20T12:00:00Z"
+        },
+        "proof": {
+          "amounts_base_units": {
+            "fee": null,
+            "gross": "2000000",
+            "max_fee": "0",
+            "recipient_net": null
+          },
+          "amounts_usdc": {
+            "fee": null,
+            "gross": "2.000000",
+            "max_fee": "0.000000",
+            "recipient_net": null
+          },
+          "block_hash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "block_number": 100,
+          "direction": "out",
+          "fee_recipient": null,
+          "flow_id": "cctp-flow:af62b1a83ff480572a3b77b70dceba51b379f88171620ef0",
+          "identity_scope": "source_receipt_pending_iris_nonce",
+          "log_indexes": {
+            "burn": 2,
+            "fee_mint": null,
+            "message": 0,
+            "protocol": 1,
+            "recipient_mint": null
+          },
+          "message_key": "cctp-v2-pending:26:0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:0",
+          "mint_recipient": "0x0000000000000000000000001111111111111111111111111111111111111111",
+          "timestamp": "2026-09-20T12:00:00Z",
+          "transaction": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "flow": {
+          "amount_usdc": "2.000000",
+          "direction": "out",
+          "id": "cctp-flow:f83b56008b55a8b7c456e31ba53a9fc52552283c6af416ee",
+          "kind": "flow",
+          "message_key": "cctp-v2-pending:26:0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:0",
+          "source": "cctp_rpc",
+          "token": "0x3600000000000000000000000000000000000000",
+          "ts": "2026-09-20T12:00:00Z"
+        },
+        "proof": {
+          "amounts_base_units": {
+            "fee": null,
+            "gross": "2000000",
+            "max_fee": "0",
+            "recipient_net": null
+          },
+          "amounts_usdc": {
+            "fee": null,
+            "gross": "2.000000",
+            "max_fee": "0.000000",
+            "recipient_net": null
+          },
+          "block_hash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "block_number": 100,
+          "direction": "out",
+          "fee_recipient": null,
+          "flow_id": "cctp-flow:f83b56008b55a8b7c456e31ba53a9fc52552283c6af416ee",
+          "identity_scope": "source_receipt_pending_iris_nonce",
+          "log_indexes": {
+            "burn": 2,
+            "fee_mint": null,
+            "message": 0,
+            "protocol": 1,
+            "recipient_mint": null
+          },
+          "message_key": "cctp-v2-pending:26:0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:0",
+          "mint_recipient": "0x0000000000000000000000001111111111111111111111111111111111111111",
+          "timestamp": "2026-09-20T12:00:00Z",
+          "transaction": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      }
+    ],
+    "source_gross_total_base_units": "4000000",
+    "status": "validated"
+  },
+  "rpc_provenance": {
+    "block_captured_at": "2026-10-08T19:07:44.246331+00:00",
+    "block_projection": "Only number, hash, timestamp, transactions retained; receipt responses unchanged.",
+    "block_request": {
+      "method": "eth_getBlockByNumber",
+      "params": [
+        "latest",
+        false
+      ]
+    },
+    "cctp_discovery": {
+      "address": "0x81d40f21f12a8f0e3252bccb954d722d4c464b64",
+      "captured_at": "2026-10-08T19:07:44.580938+00:00",
+      "from_block": 24947599,
+      "method": "eth_getLogs",
+      "response": {
+        "id": 4,
+        "jsonrpc": "2.0",
+        "result": []
+      },
+      "to_block": 24947854,
+      "topic0_any": [
+        "0x8c5261668696ce22758910d05bab8f186d6eb247ceac2af2e82c7dc17669b036",
+        "0xff48c13eda96b1cceacc6b9edeedc9e9db9d6226afbc30146b720c19d3addb1c"
+      ]
+    },
+    "chain_id_response": {
+      "id": 1,
+      "jsonrpc": "2.0",
+      "result": "0x13b2"
+    },
+    "endpoint": "https://rpc.mainnet.arc.io",
+    "historical_receipts": [
+      {
+        "captured_at": "2026-10-08T19:06:36.413508+00:00",
+        "response": {
+          "id": 2,
+          "jsonrpc": "2.0",
+          "result": null
+        },
+        "transaction": "0xe7fe6ac3b80b454b8d3264e63d858ec4902b9869c29a3ae081e8288fd6ffbebd"
+      },
+      {
+        "captured_at": "2026-10-08T19:06:36.700790+00:00",
+        "response": {
+          "id": 2,
+          "jsonrpc": "2.0",
+          "result": null
+        },
+        "transaction": "0x2647e938fd5c3b8295f4452179b0f135fb895b9c937dd56206411f0ced69d7ff"
+      },
+      {
+        "captured_at": "2026-10-08T19:06:36.959610+00:00",
+        "response": {
+          "id": 2,
+          "jsonrpc": "2.0",
+          "result": null
+        },
+        "transaction": "0xf33d6f2cfe43c6b4de6eb0f34661cb0602a861b58eabd5bbc069b27fd9f2e3d5"
+      }
+    ],
+    "rpc_requests_total": 8
+  },
+  "schema_version": 1,
+  "scope": "finite offline Arc mainnet receipt/CCTP evidence conformance probe"
+}
